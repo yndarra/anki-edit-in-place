@@ -1,0 +1,7 @@
+{
+    "package": "edit_in_place",
+    "name": "Edit In Place (formula-safe)",
+    "homepage": "https://github.com/yndarra/anki-edit-in-place",
+    "conflicts": ["1020366288", "385888438"],
+    "min_point_version": 231000
+}
