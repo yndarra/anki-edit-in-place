@@ -2,7 +2,7 @@
 // Подключается один раз на страницу повторения и окна «Просмотр».
 //
 // Поле — элемент .eip-field[contenteditable]. Формулы внутри него — островки
-// .eip-math (contenteditable=false) с исходником в data-tex. При сохранении
+// .eip-math (contenteditable=false) с исходником в data-eip-src (base64). При сохранении
 // островки заменяются обратно на исходный текст формулы, так что в поле
 // возвращается ровно то, что было, плюс правки текста вокруг.
 (function () {
@@ -16,12 +16,18 @@
         return node && node.closest ? node.closest(FIELD) : null;
     }
 
+    // base64 → строка (UTF-8): исходник формулы из data-eip-src.
+    function decodeSource(b64) {
+        const bytes = Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+        return new TextDecoder().decode(bytes);
+    }
+
     // HTML поля с формулами-исходниками вместо отрисованных формул.
     function serialize(el) {
         const clone = el.cloneNode(true);
         const sources = [];
         clone.querySelectorAll(".eip-math").forEach((island, i) => {
-            sources.push(island.getAttribute("data-tex"));
+            sources.push(decodeSource(island.getAttribute("data-eip-src")));
             island.replaceWith(document.createTextNode("\u0001EIP" + i + "\u0001"));
         });
         let html = clone.innerHTML;
