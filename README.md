@@ -9,6 +9,8 @@ The difference from [Edit Field During Review](https://ankiweb.net/shared/info/1
 - Not editable, to protect them: cloze fields `{{c1::…}}` and sound/video `[sound:…]`.
 - Without the add-on (mobile, another computer), `{{edit:Field}}` is ignored and the field shows normally.
 
+Install from AnkiWeb: code **1244274740** ([ankiweb.net/shared/info/1244274740](https://ankiweb.net/shared/info/1244274740)).
+
 Development: `run_tests.bat`, `build.bat`. Requires Anki 23.10+. Tested with 26.09: formulas, preview and review were checked in a real Anki instance.
 
 ---
